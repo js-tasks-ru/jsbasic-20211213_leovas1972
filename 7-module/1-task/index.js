@@ -33,54 +33,28 @@ export default class RibbonMenu {
       ribbonInner.appendChild(ribbonItem);
     }
 
-
   }
+
+  
 
   initRibbon() {
     let ribbonArrowLeft = this.elem.querySelector('.ribbon__arrow_left');
     let ribbonArrowRight = this.elem.querySelector('.ribbon__arrow_right');
     let ribbonInner = this.elem.querySelector('.ribbon__inner');
-    
-    console.log(ribbonInner.scrollWidth, ribbonInner.clientWidth);
-    
-    ribbonArrowLeft.onclick = function(){
+
+    ribbonArrowLeft.onclick = function () {
       ribbonInner.scrollBy(-350, 0);
-      console.log('ok-ok');
-      //console.log(ribbonInner.getBoundingClientRect().left); 143
+     // console.log('ok');
     }
 
-    ribbonArrowRight.onclick = function(){
+    ribbonArrowRight.onclick = function () {
       ribbonInner.scrollBy(350, 0);
     }
 
-   /*  ribbonInner.onscroll = function () {
-      let scrollWidth = ribbonInner.scrollWidth; //1523
-      console.log(scrollWidth);
-      let scrollLeft = ribbonInner.scrollLeft;
-      console.log(scrollLeft);
-      let clientWidth = ribbonInner.clientWidth;
-      console.log(clientWidth); // 988
-      //let innerLeft = ribbonInner.getBoundingClientRect().left; //143
-      let scrollRight = scrollWidth - scrollLeft - clientWidth;
-
-      if (scrollLeft < 1) {
-        ribbonArrowLeft.classList.remove('ribbon__arrow_visible');
-      } else {
-        ribbonArrowLeft.classList.add('ribbon__arrow_visible');
-      }
-
-      if(scrollRight = (ribbonInner.pageXOffset < clientWidth)){
-        ribbonArrowRight.classList.remove('ribbon__arrow_visible');
-      } else {
-        ribbonArrowRight.classList.add('ribbon__arrow_visible');
-      }
-    }*/
- 
-    ribbonInner.addEventListener('scroll', function() {
+    ribbonInner.addEventListener('scroll', function () {
       let scrollWidth = ribbonInner.scrollWidth;
       let scrollLeft = ribbonInner.scrollLeft;
       let clientWidth = ribbonInner.clientWidth;
-      //let innerLeft = ribbonInner.getBoundingClientRect().left;
       let scrollRight = scrollWidth - scrollLeft - clientWidth;
 
       if (scrollLeft < 1) {
@@ -89,15 +63,16 @@ export default class RibbonMenu {
         ribbonArrowLeft.classList.add('ribbon__arrow_visible');
       }
 
-      if(scrollRight = (ribbonInner.pageXOffset < clientWidth)){
+      if (scrollRight < 1) {
         ribbonArrowRight.classList.remove('ribbon__arrow_visible');
       } else {
         ribbonArrowRight.classList.add('ribbon__arrow_visible');
       }
-      
+
     });
 
-  } 
+  }
+
 
 }
 
