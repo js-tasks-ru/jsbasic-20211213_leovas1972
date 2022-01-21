@@ -8,18 +8,19 @@ export default class RibbonMenu {
   }
 
   render(categories) {
+
     this.elem = document.createElement('div');
     this.elem.classList.add('ribbon');
     this.elem.innerHTML =
       `<!--Кнопка прокрутки влево-->
-    <button class="ribbon__arrow ribbon__arrow_left ribbon__arrow_visible">
+    <button class="ribbon__arrow ribbon__arrow_left">
       <img src="/assets/images/icons/angle-icon.svg" alt="icon">
     </button>
 
     <nav class="ribbon__inner">
     </nav>
 
-    <button class="ribbon__arrow ribbon__arrow_right">
+    <button class="ribbon__arrow ribbon__arrow_right ribbon__arrow_visible">
       <img src="/assets/images/icons/angle-icon.svg" alt="icon">
     </button>`
 
@@ -30,12 +31,37 @@ export default class RibbonMenu {
       ribbonItem.classList.add('ribbon__item');
       ribbonItem.setAttribute('data-id', categories[i].id);
       ribbonItem.textContent = `${categories[i].name}`;
+
+      function toggleSelect(variable) {
+        let selected = ribbonInner.querySelectorAll('.ribbon__item_active');
+        for (let elem of selected) {
+          elem.classList.remove('ribbon__item_active');
+        }
+        variable.classList.add('ribbon__item_active');
+      }
+
+      ribbonItem.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        let link = event.target;
+        if (link) {
+          toggleSelect(link);
+        }
+
+        let customEvent = new CustomEvent('ribbon-select', { // имя события должно быть именно 'ribbon-select'
+          detail: categories[i].id, // уникальный идентификатора категории из её объекта
+          bubbles: true // это событие всплывает - это понадобится в дальнейшем
+        });
+        this.elem.dispatchEvent(customEvent);
+        console.log(this.categories[i].id);
+      })
       ribbonInner.appendChild(ribbonItem);
+
     }
 
-  }
 
-  
+
+  }
 
   initRibbon() {
     let ribbonArrowLeft = this.elem.querySelector('.ribbon__arrow_left');
@@ -44,7 +70,7 @@ export default class RibbonMenu {
 
     ribbonArrowLeft.onclick = function () {
       ribbonInner.scrollBy(-350, 0);
-     // console.log('ok');
+      // console.log('ok');
     }
 
     ribbonArrowRight.onclick = function () {
@@ -72,7 +98,7 @@ export default class RibbonMenu {
     });
 
   }
-
-
 }
+
+
 
