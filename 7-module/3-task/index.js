@@ -15,7 +15,6 @@ export default class StepSlider {
     <div class="slider__thumb">
       <span class="slider__value"></span>
     </div>
-
     <div class="slider__progress"></div>
     <!--Шаги слайдера-->
     <div class="slider__steps">
