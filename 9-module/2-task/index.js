@@ -66,7 +66,6 @@ export default class Main {
       });
     };
 
-
   }
 
   renderCarousel() {
